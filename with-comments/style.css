@@ -1,0 +1,654 @@
+/* ============================================================
+   Web课程期末作业 - 个人主页 样式表（注释版）
+   包含CSS核心知识点的详细注释
+   ============================================================ */
+
+/* -------------------- 1. CSS变量 & 全局重置 -------------------- */
+/* :root 表示文档根元素，在这里定义全局CSS变量（自定义属性） */
+:root {
+    /* 颜色变量：使用 --变量名 的方式定义，方便统一管理配色 */
+    --primary-color: #4A90D9;      /* 主色调：蓝色 */
+    --secondary-color: #2C3E50;    /* 辅助色：深蓝灰 */
+    --accent-color: #E74C3C;       /* 强调色：红色 */
+    --bg-color: #FFFFFF;           /* 背景色：白色 */
+    --text-color: #333333;         /* 文字色：深灰 */
+    --light-gray: #F5F6FA;         /* 浅灰背景 */
+    --border-color: #E0E0E0;       /* 边框颜色 */
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* 阴影效果 */
+    --transition: all 0.3s ease;   /* 过渡动画参数 */
+}
+
+/* 暗色模式的配色方案 */
+[data-theme="dark"] {
+    --bg-color: #1A1A2E;
+    --text-color: #E0E0E0;
+    --light-gray: #16213E;
+    --border-color: #2A2A4A;
+    --secondary-color: #E0E0E0;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* CSS Reset：清除浏览器默认样式，让各浏览器显示一致 */
+* {
+    margin: 0;           /* 清除外边距 */
+    padding: 0;          /* 清除内边距 */
+    box-sizing: border-box; /* 让宽高包含padding和border，方便计算 */
+}
+
+/* 设置页面平滑滚动（锚点跳转时会有过渡动画） */
+html {
+    scroll-behavior: smooth;
+}
+
+/* body 基础样式 */
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif; /* 字体优先级 */
+    line-height: 1.6;      /* 行高：1.6倍字号，增加可读性 */
+    color: var(--text-color); /* 使用CSS变量设置文字颜色 */
+    background-color: var(--bg-color);
+    transition: var(--transition); /* 暗色模式切换时的过渡动画 */
+}
+
+
+/* -------------------- 2. 导航栏样式 -------------------- */
+#navbar {
+    /* position: fixed 固定定位，导航栏始终在页面顶部 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;           /* 宽度占满整个视口 */
+    z-index: 1000;         /* z-index控制层叠顺序，数值越大越靠前 */
+
+    /* Flex布局：让Logo、导航链接、按钮水平排列 */
+    display: flex;
+    justify-content: space-between; /* 两端对齐，中间均分空间 */
+    align-items: center;           /* 垂直居中对齐 */
+
+    padding: 0 50px;       /* 左右内边距50px */
+    height: 65px;          /* 固定高度 */
+    background-color: var(--bg-color);
+    box-shadow: var(--shadow); /* 底部阴影，让导航栏有悬浮感 */
+    transition: var(--transition);
+}
+
+.nav-logo {
+    font-size: 24px;
+    font-weight: bold;     /* 加粗 */
+    color: var(--primary-color);
+}
+
+/* 导航链接列表：去掉默认的圆点，横向排列 */
+.nav-links {
+    list-style: none;      /* 去掉 <ul> 默认的项目符号（圆点） */
+    display: flex;         /* 让 <li> 横向排列 */
+    gap: 30px;            /* 每个导航项之间间隔30px */
+}
+
+/* 导航链接样式 */
+.nav-links a {
+    text-decoration: none;  /* 去掉下划线 */
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 500;
+    transition: var(--transition); /* 颜色变化时有0.3秒过渡 */
+    position: relative;     /* 为下划线动画设置定位参照 */
+}
+
+/* 导航链接鼠标悬停效果 */
+.nav-links a:hover {
+    color: var(--primary-color); /* 悬停时变蓝色 */
+}
+
+/* 导航链接下划线动画（使用 ::after 伪元素） */
+.nav-links a::after {
+    content: "";           /* 伪元素必须设置content，即使是空字符串 */
+    position: absolute;
+    bottom: -4px;          /* 位于链接文字下方4px */
+    left: 0;
+    width: 0;              /* 初始宽度为0（不可见） */
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease; /* 宽度变化的过渡动画 */
+}
+
+/* 悬停时下划线展开到100%宽度 */
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* 暗色模式切换按钮 */
+.theme-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;    /* 圆角边框 */
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    cursor: pointer;        /* 鼠标悬停时显示手型指针 */
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.theme-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+
+/* -------------------- 3. Hero 区域样式 -------------------- */
+.hero {
+    /* vh是视口高度单位，100vh = 整个浏览器窗口的高度 */
+    height: 100vh;
+    /* 背景：渐变色 + 图片的叠加效果 */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;    /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    text-align: center;
+    color: white;
+    margin-top: 0;
+}
+
+.hero-overlay {
+    /* 背景色使用 rgba：红、绿、蓝、透明度 */
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;        /* 大字号标题 */
+    margin-bottom: 20px;
+}
+
+/* 高亮文字 */
+.highlight {
+    color: #FFD700;         /* 金色 */
+}
+
+/* 打字机文字效果 */
+.typing-text {
+    font-size: 22px;
+    margin-bottom: 30px;
+    min-height: 30px;       /* 最小高度，防止文字切换时布局跳动 */
+}
+
+/* 打字机光标闪烁动画 */
+.typing-text::after {
+    content: "|";           /* 光标符号 */
+    animation: blink 1s infinite; /* 调用名为blink的动画，1秒一个周期，无限循环 */
+}
+
+/* @keyframes 定义关键帧动画 */
+@keyframes blink {
+    0%, 50% { opacity: 1; }   /* 0%和50%时间点：光标可见 */
+    51%, 100% { opacity: 0; }  /* 51%和100%时间点：光标隐藏 */
+    /* 整体效果：光标以1秒为周期闪烁 */
+}
+
+/* 主按钮样式 */
+.btn-primary {
+    padding: 14px 36px;
+    font-size: 18px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 30px;     /* 大圆角，胶囊形状 */
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: #357ABD; /* 悬停时颜色变深 */
+    /* transform: 变形；translateY(-3px) 向上移动3px */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(74, 144, 217, 0.4);
+}
+
+
+/* -------------------- 4. 通用区域标题样式 -------------------- */
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    /* 标题下方的小装饰线 */
+    position: relative;
+    padding-bottom: 15px;
+}
+
+/* 标题下方的装饰线（使用 ::after 伪元素） */
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;              /* 从左边缘50%处开始 */
+    transform: translateX(-50%); /* 向左偏移自身宽度的一半，实现居中 */
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #888;
+    margin-bottom: 50px;
+    font-size: 16px;
+}
+
+
+/* -------------------- 5. 关于我区域样式 -------------------- */
+.about-section {
+    padding: 80px 50px;
+    background-color: var(--light-gray);
+    transition: var(--transition);
+}
+
+/* Flex布局容器：将头像和文字并排 */
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;              /* 左右两列间距60px */
+    max-width: 1000px;      /* 最大宽度限制，让内容不至于太宽 */
+    margin: 0 auto;         /* 上下0，左右auto = 居中 */
+}
+
+.about-image {
+    /* flex-shrink: 0 表示空间不足时不会缩小 */
+    flex-shrink: 0;
+}
+
+/* 头像占位符：用CSS画一个圆形 */
+.avatar-placeholder {
+    width: 200px;
+    height: 200px;
+    background-color: var(--primary-color);
+    border-radius: 50%;     /* 50%圆角 = 圆形 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: white;
+}
+
+.about-text h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+/* 个人信息列表 */
+.info-list {
+    list-style: none;
+}
+
+.info-list li {
+    padding: 6px 0;
+    font-size: 15px;
+}
+
+
+/* -------------------- 6. 技能区域样式 -------------------- */
+.skills-section {
+    padding: 80px 50px;
+    transition: var(--transition);
+}
+
+/* Grid布局：自动排列技能卡片 */
+.skills-grid {
+    display: grid;
+    /* grid-template-columns：定义列宽 */
+    /* repeat(4, 1fr)：创建4列，每列等宽（1fr = 1份可用空间） */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;              /* 卡片间距30px */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 技能卡片 */
+.skill-card {
+    background-color: var(--light-gray);
+    padding: 30px 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 悬停时卡片上浮效果 */
+.skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.skill-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.skill-card h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+
+/* 进度条：背景轨道 */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #DDD;
+    border-radius: 10px;
+    overflow: hidden;       /* 隐藏超出圆角范围的部分 */
+    margin-bottom: 8px;
+}
+
+/* 进度条：填充部分 */
+.progress-fill {
+    height: 100%;
+    /* 初始宽度为0，JS会在页面加载后动态设置 */
+    width: 0;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 10px;
+    /* 宽度变化时用1.5秒的过渡动画 */
+    transition: width 1.5s ease;
+}
+
+.skill-level {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+
+/* -------------------- 7. 项目区域样式 -------------------- */
+.projects-section {
+    padding: 80px 50px;
+    background-color: var(--light-gray);
+    transition: var(--transition);
+}
+
+.projects-grid {
+    display: grid;
+    /* auto-fill：自动填充列；minmax：每列最小280px，最大等宽 */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* 项目卡片 */
+.project-card {
+    background-color: var(--bg-color);
+    border-radius: 15px;
+    overflow: hidden;       /* 圆角裁切内部内容 */
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 项目图片占位 */
+.project-img-placeholder {
+    height: 160px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+
+/* 项目信息区域 */
+.project-info {
+    padding: 20px;
+}
+
+.project-info h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+}
+
+.project-info p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* 技术标签容器 */
+.tags {
+    display: flex;
+    gap: 8px;               /* 标签之间间隔8px */
+}
+
+/* 单个标签 */
+.tag {
+    padding: 4px 12px;
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* -------------------- 8. 联系表单样式 -------------------- */
+.contact-section {
+    padding: 80px 50px;
+    transition: var(--transition);
+}
+
+/* 表单整体居中，限制最大宽度 */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 表单组：每个输入项的容器 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;         /* label独占一行 */
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+/* 输入框和文本域的通用样式 */
+.form-group input,
+.form-group textarea {
+    width: 100%;            /* 宽度占满父容器 */
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;   /* 继承body的字体设置 */
+    transition: border-color 0.3s ease;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* 输入框获取焦点时的样式 */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;          /* 去掉浏览器默认的聚焦轮廓 */
+    border-color: var(--primary-color); /* 边框变蓝 */
+    box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15); /* 外发光效果 */
+}
+
+/* 输入框有错误时的样式（JS动态添加 .error 类） */
+.form-group input.error,
+.form-group textarea.error {
+    border-color: var(--accent-color);
+}
+
+/* 错误提示文字 */
+.error-msg {
+    color: var(--accent-color);
+    font-size: 13px;
+    margin-top: 4px;
+    display: none;          /* 默认隐藏 */
+}
+
+/* 有错误时显示（JS动态添加 .show 类） */
+.error-msg.show {
+    display: block;
+}
+
+/* 提交按钮居中 */
+.btn-submit {
+    display: block;
+    margin: 30px auto 0;
+    width: 100%;
+    max-width: 200px;
+}
+
+/* 提交成功提示 */
+.success-message {
+    display: none;          /* 默认隐藏 */
+    text-align: center;
+    padding: 20px;
+    background-color: #D4EDDA;
+    color: #155724;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 30px auto 0;
+    font-size: 16px;
+}
+
+/* 显示成功提示（JS动态添加 .show 类） */
+.success-message.show {
+    display: block;
+}
+
+
+/* -------------------- 9. 页脚样式 -------------------- */
+.footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    transition: var(--transition);
+}
+
+.footer a {
+    color: #8AB4F8;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;  /* 悬停时显示下划线 */
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+
+/* -------------------- 10. 回到顶部按钮 -------------------- */
+.back-to-top {
+    /* position: fixed 相对于浏览器窗口固定定位 */
+    position: fixed;
+    bottom: 30px;           /* 距底部30px */
+    right: 30px;            /* 距右侧30px */
+    width: 45px;
+    height: 45px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;     /* 圆形按钮 */
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+    transition: var(--transition);
+    z-index: 999;
+
+    /* 默认透明不可见 */
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 显示回到顶部按钮（JS动态添加 .show 类） */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: #357ABD;
+    transform: translateY(-3px);
+}
+
+
+/* -------------------- 11. 响应式设计 -------------------- */
+/* @media 媒体查询：根据屏幕宽度调整样式 */
+/* 当屏幕宽度 ≤ 768px（平板/手机）时的样式 */
+@media (max-width: 768px) {
+    /* 导航栏改为纵向排列 */
+    #navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        gap: 10px;
+    }
+
+    /* 导航链接换行 */
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;        /* 允许换行 */
+        justify-content: center;
+    }
+
+    /* Hero标题缩小 */
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    /* 关于我区域改为上下排列 */
+    .about-container {
+        flex-direction: column;  /* 纵向排列 */
+        text-align: center;
+        gap: 30px;
+    }
+
+    /* 技能卡片改为2列 */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 项目卡片改为1列 */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 各区域减小内边距 */
+    .about-section,
+    .skills-section,
+    .projects-section,
+    .contact-section {
+        padding: 60px 20px;
+    }
+}
+
+/* 当屏幕宽度 ≤ 480px（小手机）时的样式 */
+@media (max-width: 480px) {
+    /* 技能卡片改为1列 */
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+}

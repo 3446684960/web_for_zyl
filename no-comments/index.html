@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张三的个人主页 - Web期末作业</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-logo">张三</div>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#contact">联系我</a></li>
+        </ul>
+        <button id="theme-toggle" class="theme-btn">🌙 暗色模式</button>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-overlay">
+            <h1>你好，我是<span class="highlight">张三</span></h1>
+            <p class="typing-text" id="typing-text"></p>
+            <button class="btn-primary" onclick="scrollToSection('contact')">
+                联系我
+            </button>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2 class="section-title">关于我</h2>
+        <div class="about-container">
+            <div class="about-image">
+                <div class="avatar-placeholder">
+                    <span>👤</span>
+                </div>
+            </div>
+            <div class="about-text">
+                <h3>一名热爱编程的学生</h3>
+                <p>
+                    我是一名计算机专业的大三学生，热爱前端开发和用户体验设计。
+                    目前在努力学习 HTML、CSS 和 JavaScript，希望将来能成为一名优秀的
+                    前端工程师。课余时间我喜欢打篮球和听音乐。
+                </p>
+                <ul class="info-list">
+                    <li><strong>姓名：</strong>张三</li>
+                    <li><strong>学校：</strong>XX大学</li>
+                    <li><strong>专业：</strong>计算机科学与技术</li>
+                    <li><strong>邮箱：</strong>zhangsan@example.com</li>
+                    <li><strong>所在地：</strong>中国 · 北京</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills-section">
+        <h2 class="section-title">我的技能</h2>
+        <p class="section-subtitle">以下是我正在学习和掌握的技术</p>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🌐</div>
+                <h3>HTML5</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-width="85%"></div>
+                </div>
+                <span class="skill-level">85%</span>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">🎨</div>
+                <h3>CSS3</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-width="75%"></div>
+                </div>
+                <span class="skill-level">75%</span>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <h3>JavaScript</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-width="70%"></div>
+                </div>
+                <span class="skill-level">70%</span>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">🐍</div>
+                <h3>Python</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-width="60%"></div>
+                </div>
+                <span class="skill-level">60%</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <h2 class="section-title">我的项目</h2>
+        <p class="section-subtitle">一些我做过的课程项目和练习</p>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img-placeholder">📝</div>
+                <div class="project-info">
+                    <h3>课程表应用</h3>
+                    <p>使用HTML表格制作的课程表，支持添加和删除课程。</p>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-placeholder">🧮</div>
+                <div class="project-info">
+                    <h3>计算器</h3>
+                    <p>仿手机计算器，支持加减乘除四则运算功能。</p>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-placeholder">✅</div>
+                <div class="project-info">
+                    <h3>待办事项清单</h3>
+                    <p>一个简单的Todo List，支持添加、删除和标记完成。</p>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">联系我</h2>
+        <p class="section-subtitle">如果有任何问题，欢迎给我留言</p>
+        <form id="contact-form" class="contact-form">
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" name="name"
+                       placeholder="请输入您的姓名" required>
+                <span class="error-msg" id="name-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" id="email" name="email"
+                       placeholder="请输入您的邮箱" required>
+                <span class="error-msg" id="email-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">主题</label>
+                <input type="text" id="subject" name="subject"
+                       placeholder="请输入留言主题" required>
+                <span class="error-msg" id="subject-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="message">留言内容</label>
+                <textarea id="message" name="message" rows="5"
+                          placeholder="请输入您想说的话..." required></textarea>
+                <span class="error-msg" id="message-error"></span>
+            </div>
+
+            <button type="submit" class="btn-primary btn-submit">
+                发送留言
+            </button>
+        </form>
+        <div id="success-message" class="success-message">
+            ✅ 留言发送成功！感谢您的联系。
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 张三的个人主页 | Web课程期末作业</p>
+        <p>
+            <a href="#home">返回顶部</a> |
+            <a href="#about">关于我</a> |
+            <a href="#contact">联系我</a>
+        </p>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" title="回到顶部">
+        ↑
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
