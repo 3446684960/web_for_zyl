@@ -3,198 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>张三的个人主页 - Web期末作业</title>
+    <title>吉伊卡哇小站 - Chiikawa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav id="navbar">
-        <div class="nav-logo">张三</div>
-        <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#about">关于我</a></li>
-            <li><a href="#skills">技能</a></li>
-            <li><a href="#projects">项目</a></li>
-            <li><a href="#contact">联系我</a></li>
-        </ul>
-        <button id="theme-toggle" class="theme-btn">🌙 暗色模式</button>
-    </nav>
+    <div class="app-container">
 
-    <section id="home" class="hero">
-        <div class="hero-overlay">
-            <h1>你好，我是<span class="highlight">张三</span></h1>
-            <p class="typing-text" id="typing-text"></p>
-            <button class="btn-primary" onclick="scrollToSection('contact')">
-                联系我
-            </button>
-        </div>
-    </section>
-
-    <section id="about" class="about-section">
-        <h2 class="section-title">关于我</h2>
-        <div class="about-container">
-            <div class="about-image">
-                <div class="avatar-placeholder">
-                    <span>👤</span>
-                </div>
-            </div>
-            <div class="about-text">
-                <h3>一名热爱编程的学生</h3>
-                <p>
-                    我是一名计算机专业的大三学生，热爱前端开发和用户体验设计。
-                    目前在努力学习 HTML、CSS 和 JavaScript，希望将来能成为一名优秀的
-                    前端工程师。课余时间我喜欢打篮球和听音乐。
-                </p>
-                <ul class="info-list">
-                    <li><strong>姓名：</strong>张三</li>
-                    <li><strong>学校：</strong>XX大学</li>
-                    <li><strong>专业：</strong>计算机科学与技术</li>
-                    <li><strong>邮箱：</strong>zhangsan@example.com</li>
-                    <li><strong>所在地：</strong>中国 · 北京</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="skills-section">
-        <h2 class="section-title">我的技能</h2>
-        <p class="section-subtitle">以下是我正在学习和掌握的技术</p>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">🌐</div>
-                <h3>HTML5</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="85%"></div>
-                </div>
-                <span class="skill-level">85%</span>
+        <!-- ====== 左侧导航栏 ====== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo"><img src="images/chiikawa.png" alt="吉伊" class="sidebar-logo-img"></div>
+                <h2>吉伊卡哇小站</h2>
+                <p class="sidebar-subtitle">ちいかわ</p>
             </div>
 
-            <div class="skill-card">
-                <div class="skill-icon">🎨</div>
-                <h3>CSS3</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="75%"></div>
-                </div>
-                <span class="skill-level">75%</span>
-            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="home">
+                    <span class="nav-icon">🏠</span>
+                    <span>主页</span>
+                </a>
+                <a href="#" class="nav-item" data-page="characters">
+                    <span class="nav-icon">🎭</span>
+                    <span>角色介绍</span>
+                </a>
+                <a href="#" class="nav-item modal-trigger" id="side-weather">
+                    <span class="nav-icon">🌤️</span>
+                    <span>天气小助手</span>
+                </a>
+                <a href="#" class="nav-item" data-page="contact">
+                    <span class="nav-icon">✉️</span>
+                    <span>留言</span>
+                </a>
+                <a href="#" class="nav-item modal-trigger" id="side-game">
+                    <span class="nav-icon">🎯</span>
+                    <span>小彩蛋</span>
+                </a>
+            </nav>
 
-            <div class="skill-card">
-                <div class="skill-icon">⚡</div>
-                <h3>JavaScript</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="70%"></div>
-                </div>
-                <span class="skill-level">70%</span>
+            <div class="sidebar-footer">
+                <p>🐣 うれしたのし</p>
             </div>
+        </aside>
 
-            <div class="skill-card">
-                <div class="skill-icon">🐍</div>
-                <h3>Python</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="60%"></div>
-                </div>
-                <span class="skill-level">60%</span>
-            </div>
-        </div>
-    </section>
+        <!-- ====== 主内容区 ====== -->
+        <main class="main-content">
 
-    <section id="projects" class="projects-section">
-        <h2 class="section-title">我的项目</h2>
-        <p class="section-subtitle">一些我做过的课程项目和练习</p>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-img-placeholder">📝</div>
-                <div class="project-info">
-                    <h3>课程表应用</h3>
-                    <p>使用HTML表格制作的课程表，支持添加和删除课程。</p>
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JS</span>
+            <!-- ====== 主页 ====== -->
+            <section class="page active" id="page-home">
+                <div class="hero-section">
+                    <div class="floating-icons" id="floating-icons"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge">🐹 ちいかわ</div>
+                        <h1 class="hero-title">欢迎来到吉伊卡哇的世界</h1>
+                        <p class="hero-description">
+                            <strong>吉伊卡哇（ちいかわ）</strong>是日本插画家ナガノ（Nagano）创作的漫画系列，
+                            全称是"なんか小さくてかわいいやつ"，意思是"<em>又小又可爱的家伙</em>"。
+                            故事围绕吉伊（Chiikawa）、哈奇（Hachiware）、兔子（Usagi）等可爱角色展开，
+                            画风软萌治愈，在日本和中国都超受欢迎！
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="https://www.anime-chiikawa.jp/" target="_blank" class="btn-official">
+                                🔗 访问Chiikawa官网
+                            </a>
+                            <button class="btn-cute" data-page="characters">🎭 认识角色</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-img-placeholder">🧮</div>
-                <div class="project-info">
-                    <h3>计算器</h3>
-                    <p>仿手机计算器，支持加减乘除四则运算功能。</p>
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JS</span>
+                <div class="links-section">
+                    <h2 class="section-title">🔗 热点链接</h2>
+                    <div class="links-grid">
+                        <a href="https://www.anime-chiikawa.jp/" target="_blank" class="link-card">
+                            <span class="link-icon">📺</span>
+                            <span class="link-text">
+                                <strong>动画官网</strong>
+                                <small>anime-chiikawa.jp</small>
+                            </span>
+                        </a>
+                        <a href="https://chiikawa-info.jp" target="_blank" class="link-card">
+                            <span class="link-icon">📰</span>
+                            <span class="link-text">
+                                <strong>综合情报站</strong>
+                                <small>chiikawa-info.jp</small>
+                            </span>
+                        </a>
+                        <a href="https://www.chiikawa-market.jp" target="_blank" class="link-card">
+                            <span class="link-icon">🛍️</span>
+                            <span class="link-text">
+                                <strong>官方商店</strong>
+                                <small>chiikawa-market.jp</small>
+                            </span>
+                        </a>
+                        <a href="https://www.chiikawaofficial.com" target="_blank" class="link-card">
+                            <span class="link-icon">🌍</span>
+                            <span class="link-text">
+                                <strong>英文国际官网</strong>
+                                <small>chiikawaofficial.com</small>
+                            </span>
+                        </a>
+                        <a href="https://twitter.com/ngnchiikawa" target="_blank" class="link-card">
+                            <span class="link-icon">🐦</span>
+                            <span class="link-text">
+                                <strong>官方 Twitter / X</strong>
+                                <small>关注作者ナガノ</small>
+                            </span>
+                        </a>
+                        <a href="https://www.bilibili.com/search?keyword=chiikawa" target="_blank" class="link-card">
+                            <span class="link-icon">🎬</span>
+                            <span class="link-text">
+                                <strong>B站搜索 Chiikawa</strong>
+                                <small>动画观看 & 二创</small>
+                            </span>
+                        </a>
                     </div>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-img-placeholder">✅</div>
-                <div class="project-info">
-                    <h3>待办事项清单</h3>
-                    <p>一个简单的Todo List，支持添加、删除和标记完成。</p>
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JS</span>
+                <div class="fun-facts">
+                    <h2 class="section-title">💡 你知道吗？</h2>
+                    <div class="fact-card" id="fact-card">
+                        <p id="fact-text">点击下方按钮，发现有趣的小知识~</p>
                     </div>
+                    <button class="btn-cute" id="btn-fact">🎲 换一条</button>
+                </div>
+            </section>
+
+            <!-- ====== 角色介绍页 ====== -->
+            <section class="page" id="page-characters">
+                <h2 class="section-title">🎭 角色介绍</h2>
+                <p class="section-subtitle">鼠标悬停查看角色信息，移开3秒后消失，点击可固定浮窗</p>
+
+                <div class="character-image-wrapper" id="character-image-wrapper">
+                    <img
+                        src="group-photo.jpg"
+                        alt="吉伊卡哇角色合照"
+                        class="character-photo"
+                        id="character-photo"
+                    >
+                    <div class="image-placeholder" id="image-placeholder">
+                        <div class="placeholder-content">
+                            <span class="placeholder-icon">📷</span>
+                            <p>请将你的吉伊卡哇合照命名为</p>
+                            <p><strong>group-photo.jpg</strong></p>
+                            <p>放入 no-comments 文件夹</p>
+                        </div>
+                    </div>
+                    <div class="tooltip" id="tooltip">
+                        <span class="tooltip-close" id="tooltip-close">&times;</span>
+                        <div class="tooltip-body">
+                            <div class="tooltip-name" id="tooltip-name"></div>
+                            <div class="tooltip-desc" id="tooltip-desc"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="character-cards" id="character-cards">
+                    <h3>角色列表（点击查看详情）</h3>
+                </div>
+            </section>
+
+            <!-- ====== 留言页 ====== -->
+            <section class="page" id="page-contact">
+                <h2 class="section-title">✉️ 留言</h2>
+                <p class="section-subtitle">有什么想说的，就写下来吧~</p>
+
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">昵称</label>
+                        <input type="text" id="name" name="name"
+                               placeholder="请输入你的昵称" required>
+                        <span class="error-msg" id="name-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" name="email"
+                               placeholder="请输入你的邮箱" required>
+                        <span class="error-msg" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">主题</label>
+                        <input type="text" id="subject" name="subject"
+                               placeholder="请输入留言主题" required>
+                        <span class="error-msg" id="subject-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">留言内容</label>
+                        <textarea id="message" name="message" rows="5"
+                                  placeholder="请输入你想说的话..." required></textarea>
+                        <span class="error-msg" id="message-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn-cute btn-submit">
+                        💌 发送留言
+                    </button>
+                </form>
+
+                <div id="success-message" class="success-message">
+                    留言发送成功！感谢你的留言~
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ====== 天气小助手弹窗 ====== -->
+    <div class="modal-overlay" id="weather-modal">
+        <div class="modal-card weather-modal-card">
+            <button class="modal-close" id="weather-close">&times;</button>
+            <h2 class="modal-title">🌤️ 天气小助手</h2>
+            <div class="weather-search">
+                <input type="text" id="city-input" class="city-input"
+                       placeholder="输入城市名，如：北京">
+                <button id="search-btn" class="btn-cute">🔍 查询</button>
+            </div>
+            <div class="weather-result-container" id="weather-result-container">
+                <div class="weather-placeholder">
+                    <span>🌈</span>
+                    <p>输入城市名，查看天气~</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">联系我</h2>
-        <p class="section-subtitle">如果有任何问题，欢迎给我留言</p>
-        <form id="contact-form" class="contact-form">
-            <div class="form-group">
-                <label for="name">姓名</label>
-                <input type="text" id="name" name="name"
-                       placeholder="请输入您的姓名" required>
-                <span class="error-msg" id="name-error"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="email">邮箱</label>
-                <input type="email" id="email" name="email"
-                       placeholder="请输入您的邮箱" required>
-                <span class="error-msg" id="email-error"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="subject">主题</label>
-                <input type="text" id="subject" name="subject"
-                       placeholder="请输入留言主题" required>
-                <span class="error-msg" id="subject-error"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="message">留言内容</label>
-                <textarea id="message" name="message" rows="5"
-                          placeholder="请输入您想说的话..." required></textarea>
-                <span class="error-msg" id="message-error"></span>
-            </div>
-
-            <button type="submit" class="btn-primary btn-submit">
-                发送留言
-            </button>
-        </form>
-        <div id="success-message" class="success-message">
-            ✅ 留言发送成功！感谢您的联系。
+    <!-- ====== 角色详情弹窗 ====== -->
+    <div class="modal-overlay" id="char-modal">
+        <div class="modal-card char-modal-card">
+            <button class="modal-close" id="char-modal-close">&times;</button>
+            <div class="modal-emoji" id="char-modal-emoji"></div>
+            <h2 class="modal-name" id="char-modal-name"></h2>
+            <p class="modal-desc" id="char-modal-desc"></p>
         </div>
-    </section>
+    </div>
 
-    <footer class="footer">
-        <p>&copy; 2026 张三的个人主页 | Web课程期末作业</p>
-        <p>
-            <a href="#home">返回顶部</a> |
-            <a href="#about">关于我</a> |
-            <a href="#contact">联系我</a>
-        </p>
-    </footer>
+    <!-- ====== 小彩蛋弹窗 ====== -->
+    <div class="modal-overlay" id="game-modal">
+        <div class="modal-card game-modal-card">
+            <button class="modal-close" id="game-close">&times;</button>
+            <h2 class="modal-title">🎯 戳一戳吉伊</h2>
+            <p class="game-subtitle">点击跳来跳去的吉伊，看看能得多少分！</p>
+            <div class="game-area" id="game-area">
+                <div class="game-target" id="game-target"><img src="images/chiikawa.png" alt="吉伊" class="game-target-img"></div>
+            </div>
+            <div class="game-info">
+                <span>得分：<strong id="game-score">0</strong></span>
+                <span>剩余时间：<strong id="game-time">30</strong>秒</span>
+            </div>
+            <button class="btn-cute" id="btn-start-game">🎮 开始游戏</button>
+        </div>
+    </div>
 
-    <button id="back-to-top" class="back-to-top" title="回到顶部">
-        ↑
-    </button>
+    <!-- ====== 右下角浮动小伙伴 ====== -->
+    <div class="floating-mascot" id="floating-mascot" title="点我试试~">
+        <img src="images/chiikawa.png" alt="吉伊" class="mascot-img">
+        <span class="mascot-bubble" id="mascot-bubble">戳戳我~</span>
+    </div>
 
     <script src="script.js"></script>
 </body>

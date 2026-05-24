@@ -1,268 +1,333 @@
 <!DOCTYPE html>
 <!--
-    Web课程期末作业 - 个人主页
-    这是一个展示HTML、CSS、JS基础知识的综合示例
-    包含详细注释，适合初学者学习
+    Web课程期末作业 - 吉伊卡哇主题小站（注释版）
+    包含HTML/CSS/JS基础知识的详细注释
 
-    知识点覆盖：
-    - HTML：语义化标签、表单、列表、链接、图片
-    - CSS：盒模型、Flex布局、Grid布局、动画、过渡、伪类
-    - JS：DOM操作、事件处理、表单验证、本地存储
+    页面功能：
+    - 左侧固定导航栏
+    - 主页：动画介绍 + 官网链接 + 热点链接 + 趣味小知识
+    - 角色介绍：合照热区悬停浮窗 + 九宫格角色图鉴
+    - 天气小助手：弹窗形式
+    - 小彩蛋：戳一戳吉伊游戏
+    - 留言：表单验证
+    - 右下角浮动小伙伴
 -->
 <html lang="zh-CN">
 <head>
-    <!-- 字符编码：UTF-8 支持中文显示 -->
+    <!-- 字符编码：UTF-8，支持中文和日文 -->
     <meta charset="UTF-8">
     <!-- 视口设置：让页面适配移动端 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 页面标题 -->
-    <title>张三的个人主页 - Web期末作业</title>
+    <title>吉伊卡哇小站 - Chiikawa</title>
     <!-- 引入外部CSS样式表 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- ==================== 导航栏 ==================== -->
-    <!-- <nav> 是HTML5语义化标签，表示导航区域 -->
-    <nav id="navbar">
-        <!-- Logo：通常放网站名称或头像 -->
-        <div class="nav-logo">张三</div>
+    <!-- .app-container：Flex布局，将侧边栏和主内容区并排 -->
+    <div class="app-container">
 
-        <!-- 无序列表 <ul> 配合 <li> 创建导航菜单 -->
-        <ul class="nav-links">
-            <!-- href="#id值" 实现锚点跳转（点击后页面滚动到对应id的元素） -->
-            <li><a href="#home">首页</a></li>
-            <li><a href="#about">关于我</a></li>
-            <li><a href="#skills">技能</a></li>
-            <li><a href="#projects">项目</a></li>
-            <li><a href="#contact">联系我</a></li>
-        </ul>
-
-        <!-- 暗色/亮色模式切换按钮 -->
-        <button id="theme-toggle" class="theme-btn">🌙 暗色模式</button>
-    </nav>
-
-    <!-- ==================== 首页 Hero 区域 ==================== -->
-    <!-- <section> 语义化标签，表示页面中一个独立的内容区块 -->
-    <section id="home" class="hero">
-        <!-- 半透明遮罩层，让文字在背景图上更清晰 -->
-        <div class="hero-overlay">
-            <!-- <h1> 是最重要的标题，一个页面建议只有一个 -->
-            <h1>你好，我是<span class="highlight">张三</span></h1>
-            <!-- 打字机效果的文字，由JS动态生成 -->
-            <p class="typing-text" id="typing-text"></p>
-            <!-- onclick：点击时调用JS函数，实现滚动到联系区域 -->
-            <button class="btn-primary" onclick="scrollToSection('contact')">
-                联系我
-            </button>
-        </div>
-    </section>
-
-    <!-- ==================== 关于我 ==================== -->
-    <section id="about" class="about-section">
-        <h2 class="section-title">关于我</h2>
-        <!-- 使用Flex布局将图片和文字并排显示 -->
-        <div class="about-container">
-            <!-- 左侧：头像区域 -->
-            <div class="about-image">
-                <div class="avatar-placeholder">
-                    <span>👤</span>
-                </div>
-            </div>
-            <!-- 右侧：自我介绍文字 -->
-            <div class="about-text">
-                <h3>一名热爱编程的学生</h3>
-                <!-- <p> 段落标签，用于包裹文本内容 -->
-                <p>
-                    我是一名计算机专业的大三学生，热爱前端开发和用户体验设计。
-                    目前在努力学习 HTML、CSS 和 JavaScript，希望将来能成为一名优秀的
-                    前端工程师。课余时间我喜欢打篮球和听音乐。
-                </p>
-                <!-- 定义列表展示个人信息 -->
-                <ul class="info-list">
-                    <li><strong>姓名：</strong>张三</li>
-                    <li><strong>学校：</strong>XX大学</li>
-                    <li><strong>专业：</strong>计算机科学与技术</li>
-                    <li><strong>邮箱：</strong>zhangsan@example.com</li>
-                    <li><strong>所在地：</strong>中国 · 北京</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 技能区域 ==================== -->
-    <section id="skills" class="skills-section">
-        <h2 class="section-title">我的技能</h2>
-        <p class="section-subtitle">以下是我正在学习和掌握的技术</p>
-
-        <!-- Grid布局：自动排列技能卡片 -->
-        <div class="skills-grid">
-            <!-- 每个 .skill-card 是一张技能卡片 -->
-            <div class="skill-card">
-                <div class="skill-icon">🌐</div>
-                <h3>HTML5</h3>
-                <!-- 进度条：外层是背景轨道，内层是填充色 -->
-                <div class="progress-bar">
-                    <!-- data-width 自定义属性，JS会读取它来设置进度条宽度 -->
-                    <div class="progress-fill" data-width="85%"></div>
-                </div>
-                <span class="skill-level">85%</span>
+        <!-- ====== 左侧导航栏 ====== -->
+        <!-- <aside> 语义化标签，表示侧边栏 -->
+        <!-- position: fixed 固定定位，不随页面滚动 -->
+        <aside class="sidebar" id="sidebar">
+            <!-- 侧边栏头部：Logo + 标题 -->
+            <div class="sidebar-header">
+                <div class="sidebar-logo"><img src="images/chiikawa.png" alt="吉伊" class="sidebar-logo-img"></div>
+                <h2>吉伊卡哇小站</h2>
+                <p class="sidebar-subtitle">ちいかわ</p>
             </div>
 
-            <div class="skill-card">
-                <div class="skill-icon">🎨</div>
-                <h3>CSS3</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="75%"></div>
-                </div>
-                <span class="skill-level">75%</span>
+            <!-- <nav> 语义化标签，表示导航区域 -->
+            <nav class="sidebar-nav">
+                <!-- data-page 自定义属性：JS通过它判断切换到哪个页面 -->
+                <!-- .active 类：当前所在的页面高亮 -->
+                <a href="#" class="nav-item active" data-page="home">
+                    <span class="nav-icon">🏠</span>
+                    <span>主页</span>
+                </a>
+                <a href="#" class="nav-item" data-page="characters">
+                    <span class="nav-icon">🎭</span>
+                    <span>角色介绍</span>
+                </a>
+                <!-- 天气小助手：点击打开弹窗（不是页面切换） -->
+                <a href="#" class="nav-item modal-trigger" id="side-weather">
+                    <span class="nav-icon">🌤️</span>
+                    <span>天气小助手</span>
+                </a>
+                <a href="#" class="nav-item" data-page="contact">
+                    <span class="nav-icon">✉️</span>
+                    <span>留言</span>
+                </a>
+                <!-- 小彩蛋：点击打开游戏弹窗 -->
+                <a href="#" class="nav-item modal-trigger" id="side-game">
+                    <span class="nav-icon">🎯</span>
+                    <span>小彩蛋</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>🐣 うれしたのし</p>
             </div>
+        </aside>
 
-            <div class="skill-card">
-                <div class="skill-icon">⚡</div>
-                <h3>JavaScript</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="70%"></div>
-                </div>
-                <span class="skill-level">70%</span>
-            </div>
+        <!-- ====== 主内容区 ====== -->
+        <!-- margin-left 等于侧边栏宽度，避免被遮挡 -->
+        <main class="main-content">
 
-            <div class="skill-card">
-                <div class="skill-icon">🐍</div>
-                <h3>Python</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="60%"></div>
-                </div>
-                <span class="skill-level">60%</span>
-            </div>
-        </div>
-    </section>
+            <!-- ====== 主页 ====== -->
+            <!-- .page 默认隐藏，.active 时显示（由JS控制） -->
+            <section class="page active" id="page-home">
 
-    <!-- ==================== 项目展示 ==================== -->
-    <section id="projects" class="projects-section">
-        <h2 class="section-title">我的项目</h2>
-        <p class="section-subtitle">一些我做过的课程项目和练习</p>
+                <!-- Hero区域：渐变背景 + 大标题 -->
+                <div class="hero-section">
+                    <!-- 浮动装饰图标（JS动态生成） -->
+                    <div class="floating-icons" id="floating-icons"></div>
 
-        <div class="projects-grid">
-            <!-- 项目卡片：包含图片占位、标题、描述和技术标签 -->
-            <div class="project-card">
-                <div class="project-img-placeholder">📝</div>
-                <div class="project-info">
-                    <h3>课程表应用</h3>
-                    <p>使用HTML表格制作的课程表，支持添加和删除课程。</p>
-                    <!-- 技术标签 -->
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JS</span>
+                    <div class="hero-content">
+                        <div class="hero-badge">🐹 ちいかわ</div>
+                        <h1 class="hero-title">欢迎来到吉伊卡哇的世界</h1>
+
+                        <!-- 动画简介 -->
+                        <p class="hero-description">
+                            <strong>吉伊卡哇（ちいかわ）</strong>是日本插画家ナガノ（Nagano）创作的漫画系列，
+                            全称是"なんか小さくてかわいいやつ"，意思是"<em>又小又可爱的家伙</em>"。
+                            故事围绕吉伊（Chiikawa）、哈奇（Hachiware）、兔子（Usagi）等可爱角色展开，
+                            画风软萌治愈，在日本和中国都超受欢迎！
+                        </p>
+
+                        <div class="hero-buttons">
+                            <!-- target="_blank"：新标签页打开 -->
+                            <a href="https://www.anime-chiikawa.jp/" target="_blank" class="btn-official">
+                                🔗 访问Chiikawa官网
+                            </a>
+                            <button class="btn-cute" data-page="characters">🎭 认识角色</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-img-placeholder">🧮</div>
-                <div class="project-info">
-                    <h3>计算器</h3>
-                    <p>仿手机计算器，支持加减乘除四则运算功能。</p>
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JS</span>
+                <!-- 热点链接区：Grid布局 -->
+                <div class="links-section">
+                    <h2 class="section-title">🔗 热点链接</h2>
+                    <div class="links-grid">
+                        <!-- 每个 .link-card 是可点击的链接卡片 -->
+                        <a href="https://www.anime-chiikawa.jp/" target="_blank" class="link-card">
+                            <span class="link-icon">📺</span>
+                            <span class="link-text">
+                                <strong>动画官网</strong>
+                                <small>anime-chiikawa.jp</small>
+                            </span>
+                        </a>
+                        <a href="https://chiikawa-info.jp" target="_blank" class="link-card">
+                            <span class="link-icon">📰</span>
+                            <span class="link-text">
+                                <strong>综合情报站</strong>
+                                <small>chiikawa-info.jp</small>
+                            </span>
+                        </a>
+                        <a href="https://www.chiikawa-market.jp" target="_blank" class="link-card">
+                            <span class="link-icon">🛍️</span>
+                            <span class="link-text">
+                                <strong>官方商店</strong>
+                                <small>chiikawa-market.jp</small>
+                            </span>
+                        </a>
+                        <a href="https://www.chiikawaofficial.com" target="_blank" class="link-card">
+                            <span class="link-icon">🌍</span>
+                            <span class="link-text">
+                                <strong>英文国际官网</strong>
+                                <small>chiikawaofficial.com</small>
+                            </span>
+                        </a>
+                        <a href="https://twitter.com/ngnchiikawa" target="_blank" class="link-card">
+                            <span class="link-icon">🐦</span>
+                            <span class="link-text">
+                                <strong>官方 Twitter / X</strong>
+                                <small>关注作者ナガノ</small>
+                            </span>
+                        </a>
+                        <a href="https://www.bilibili.com/search?keyword=chiikawa" target="_blank" class="link-card">
+                            <span class="link-icon">🎬</span>
+                            <span class="link-text">
+                                <strong>B站搜索 Chiikawa</strong>
+                                <small>动画观看 & 二创</small>
+                            </span>
+                        </a>
                     </div>
                 </div>
+
+                <!-- 趣味小知识：点击按钮随机切换 -->
+                <div class="fun-facts">
+                    <h2 class="section-title">💡 你知道吗？</h2>
+                    <div class="fact-card" id="fact-card">
+                        <p id="fact-text">点击下方按钮，发现有趣的小知识~</p>
+                    </div>
+                    <button class="btn-cute" id="btn-fact">🎲 换一条</button>
+                </div>
+            </section>
+
+            <!-- ====== 角色介绍页 ====== -->
+            <section class="page" id="page-characters">
+                <h2 class="section-title">🎭 角色介绍</h2>
+                <p class="section-subtitle">鼠标悬停查看角色信息，移开3秒后消失，点击可固定浮窗</p>
+
+                <!--
+                    图像热区容器
+                    原理：
+                    1. 监听 mousemove 获取鼠标在图片上的百分比位置
+                    2. 与 characterAreas 坐标数组比对
+                    3. 匹配到角色 → 显示浮窗，清除隐藏定时器
+                    4. 移开 → 3秒后浮窗消失（setTimeout）
+                    5. 点击 → 固定浮窗（pinned状态，不消失）
+                -->
+                <div class="character-image-wrapper" id="character-image-wrapper">
+                    <!--
+                        角色合照
+                        请将你的吉伊卡哇合照命名为 group-photo.jpg 放入文件夹
+                    -->
+                    <img
+                        src="group-photo.jpg"
+                        alt="吉伊卡哇角色合照"
+                        class="character-photo"
+                        id="character-photo"
+                    >
+                    <!-- 图片加载前显示的占位符 -->
+                    <div class="image-placeholder" id="image-placeholder">
+                        <div class="placeholder-content">
+                            <span class="placeholder-icon">📷</span>
+                            <p>请将你的吉伊卡哇合照命名为</p>
+                            <p><strong>group-photo.jpg</strong></p>
+                            <p>放入 with-comments 文件夹</p>
+                        </div>
+                    </div>
+
+                    <!-- 悬停浮窗 -->
+                    <div class="tooltip" id="tooltip">
+                        <!-- 关闭按钮：仅在浮窗固定(pinned)时显示 -->
+                        <span class="tooltip-close" id="tooltip-close">&times;</span>
+                        <div class="tooltip-body">
+                            <div class="tooltip-name" id="tooltip-name"></div>
+                            <div class="tooltip-desc" id="tooltip-desc"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 九宫格角色图鉴：由JS动态生成 -->
+                <div class="character-cards" id="character-cards"></div>
+            </section>
+
+            <!-- ====== 留言页 ====== -->
+            <section class="page" id="page-contact">
+                <h2 class="section-title">✉️ 留言</h2>
+                <p class="section-subtitle">有什么想说的，就写下来吧~</p>
+
+                <!--
+                    <form> 表单
+                    submit 事件 + JS验证，阻止默认提交行为
+                -->
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <!-- <label> for 关联 input 的 id，点击label聚焦input -->
+                        <label for="name">昵称</label>
+                        <input type="text" id="name" name="name"
+                               placeholder="请输入你的昵称" required>
+                        <span class="error-msg" id="name-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <!-- type="email" 浏览器自动校验格式 -->
+                        <input type="email" id="email" name="email"
+                               placeholder="请输入你的邮箱" required>
+                        <span class="error-msg" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">主题</label>
+                        <input type="text" id="subject" name="subject"
+                               placeholder="请输入留言主题" required>
+                        <span class="error-msg" id="subject-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">留言内容</label>
+                        <!-- <textarea> 多行文本输入，rows设置可见行数 -->
+                        <textarea id="message" name="message" rows="5"
+                                  placeholder="请输入你想说的话..." required></textarea>
+                        <span class="error-msg" id="message-error"></span>
+                    </div>
+
+                    <!-- type="submit" 触发表单的 submit 事件 -->
+                    <button type="submit" class="btn-cute btn-submit">
+                        💌 发送留言
+                    </button>
+                </form>
+
+                <div id="success-message" class="success-message">
+                    留言发送成功！感谢你的留言~
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ====== 天气小助手弹窗 ====== -->
+    <!-- Modal结构：遮罩层 + 居中卡片，点击遮罩或×关闭 -->
+    <div class="modal-overlay" id="weather-modal">
+        <div class="modal-card weather-modal-card">
+            <button class="modal-close" id="weather-close">&times;</button>
+            <h2 class="modal-title">🌤️ 天气小助手</h2>
+
+            <div class="weather-search">
+                <input type="text" id="city-input" class="city-input"
+                       placeholder="输入城市名，如：北京">
+                <button id="search-btn" class="btn-cute">🔍 查询</button>
             </div>
 
-            <div class="project-card">
-                <div class="project-img-placeholder">✅</div>
-                <div class="project-info">
-                    <h3>待办事项清单</h3>
-                    <p>一个简单的Todo List，支持添加、删除和标记完成。</p>
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JS</span>
-                    </div>
+            <!-- 天气结果区：由JS异步填充 -->
+            <div class="weather-result-container" id="weather-result-container">
+                <div class="weather-placeholder">
+                    <span>🌈</span>
+                    <p>输入城市名，查看天气~</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- ==================== 联系我（表单区域） ==================== -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">联系我</h2>
-        <p class="section-subtitle">如果有任何问题，欢迎给我留言</p>
-
-        <!-- <form> 表单标签，用于收集用户输入 -->
-        <!-- id用于JS获取表单元素，class用于CSS样式 -->
-        <form id="contact-form" class="contact-form">
-            <!-- .form-group 将每个表单项的label、input、错误提示打包在一起 -->
-            <div class="form-group">
-                <!-- <label> 标签的 for 属性对应 input 的 id，点击label会自动聚焦input -->
-                <label for="name">姓名</label>
-                <!-- type="text" 文本输入框 -->
-                <!-- required 表示必填，浏览器会阻止空值提交 -->
-                <input type="text" id="name" name="name"
-                       placeholder="请输入您的姓名" required>
-                <!-- 错误提示，默认隐藏，验证失败时JS会显示它 -->
-                <span class="error-msg" id="name-error"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="email">邮箱</label>
-                <!-- type="email" 浏览器会自动校验邮箱格式 -->
-                <input type="email" id="email" name="email"
-                       placeholder="请输入您的邮箱" required>
-                <span class="error-msg" id="email-error"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="subject">主题</label>
-                <input type="text" id="subject" name="subject"
-                       placeholder="请输入留言主题" required>
-                <span class="error-msg" id="subject-error"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="message">留言内容</label>
-                <!-- <textarea> 多行文本输入框，rows="5" 设置可见行数 -->
-                <textarea id="message" name="message" rows="5"
-                          placeholder="请输入您想说的话..." required></textarea>
-                <span class="error-msg" id="message-error"></span>
-            </div>
-
-            <!-- type="submit" 提交按钮，点击触发 form 的 submit 事件 -->
-            <button type="submit" class="btn-primary btn-submit">
-                发送留言
-            </button>
-        </form>
-
-        <!-- 提交成功后显示的提示信息，默认隐藏 -->
-        <div id="success-message" class="success-message">
-            ✅ 留言发送成功！感谢您的联系。
+    <!-- ====== 角色详情弹窗 ====== -->
+    <div class="modal-overlay" id="char-modal">
+        <div class="modal-card char-modal-card">
+            <button class="modal-close" id="char-modal-close">&times;</button>
+            <!-- 内容由JS的 openCharModal() 动态填充 -->
+            <div class="modal-emoji" id="char-modal-emoji"></div>
+            <h2 class="modal-name" id="char-modal-name"></h2>
+            <p class="modal-desc" id="char-modal-desc"></p>
         </div>
-    </section>
+    </div>
 
-    <!-- ==================== 页脚 ==================== -->
-    <!-- <footer> 语义化标签，表示页面底部信息 -->
-    <footer class="footer">
-        <!-- &copy; 是HTML实体，显示版权符号 © -->
-        <p>&copy; 2026 张三的个人主页 | Web课程期末作业</p>
-        <p>
-            <a href="#home">返回顶部</a> |
-            <a href="#about">关于我</a> |
-            <a href="#contact">联系我</a>
-        </p>
-    </footer>
+    <!-- ====== 小彩蛋弹窗 ====== -->
+    <div class="modal-overlay" id="game-modal">
+        <div class="modal-card game-modal-card">
+            <button class="modal-close" id="game-close">&times;</button>
+            <h2 class="modal-title">🎯 戳一戳吉伊</h2>
+            <p class="game-subtitle">点击跳来跳去的吉伊，看看能得多少分！</p>
+            <div class="game-area" id="game-area">
+                <div class="game-target" id="game-target"><img src="images/chiikawa.png" alt="吉伊" class="game-target-img"></div>
+            </div>
+            <div class="game-info">
+                <span>得分：<strong id="game-score">0</strong></span>
+                <span>剩余时间：<strong id="game-time">30</strong>秒</span>
+            </div>
+            <button class="btn-cute" id="btn-start-game">🎮 开始游戏</button>
+        </div>
+    </div>
 
-    <!-- 回到顶部按钮：固定在页面右下角，默认隐藏 -->
-    <button id="back-to-top" class="back-to-top" title="回到顶部">
-        ↑
-    </button>
+    <!-- ====== 右下角浮动小伙伴 ====== -->
+    <div class="floating-mascot" id="floating-mascot" title="点我试试~">
+        <img src="images/chiikawa.png" alt="吉伊" class="mascot-img">
+        <span class="mascot-bubble" id="mascot-bubble">戳戳我~</span>
+    </div>
 
-    <!--
-        引入外部JavaScript文件
-        放在 </body> 前面，确保HTML元素都已经加载完成
-        如果放在 <head> 里，JS执行时DOM还没加载，会找不到元素
-    -->
+    <!-- 引入外部JS文件，放在body底部确保DOM先加载 -->
     <script src="script.js"></script>
 </body>
 </html>
