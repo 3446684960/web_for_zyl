@@ -32,7 +32,7 @@ body {
     min-height: 100vh;
 }
 
-/* ====== 左侧导航栏 ====== */
+/* ====== 导航栏 ====== */
 .sidebar {
     position: fixed;
     top: 0; left: 0;
@@ -123,7 +123,7 @@ body {
     color: var(--text-light);
 }
 
-/* ====== 主内容区 ====== */
+/* ====== 主要内容区 ====== */
 .main-content {
     margin-left: 230px;
     flex: 1;
@@ -143,7 +143,7 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ====== 通用标题 ====== */
+/* ====== 标题 ====== */
 .section-title {
     text-align: center;
     font-size: 28px;
@@ -158,7 +158,7 @@ body {
     font-size: 14px;
 }
 
-/* ====== 主页 Hero ====== */
+/* ====== 主页  ====== */
 .hero-section {
     position: relative;
     background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 40%, #FFF9C4 100%);
@@ -392,7 +392,7 @@ body {
 .tooltip-name { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 4px; }
 .tooltip-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
 
-/* 九宫格角色网格 */
+/* 九宫格 */
 .char-grid-section {
     max-width: 700px;
     margin: 0 auto;

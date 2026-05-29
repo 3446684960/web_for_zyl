@@ -1,69 +1,67 @@
 // ===== 角色配置 =====
-// x, y, w, h 是热区坐标（占图片宽高的百分比）
-// image: 角色图片路径，放在 images/ 文件夹下
+
 var characterAreas = [
     {
         id: "chiikawa", name: "吉伊", emoji: "🐹",
         image: "images/chiikawa.png",
-        shortDesc: "白色小仓鼠，天真爱哭但关键时刻很勇敢~",
-        fullDesc: "吉伊（ちいかわ）是本作的主角，一只白色的小仓鼠。性格天真可爱，有点爱哭，但在关键时刻总能鼓起勇气。它和哈奇是好朋友，经常一起冒险、打工、吃东西。",
-        x: 2, y: 5, w: 30, h: 80
-    },
-    {
-        id: "hachiware", name: "哈奇", emoji: "🐱",
-        image: "images/hachiware.png",
-        shortDesc: "蓝色小猫，开朗可靠，是吉伊最好的朋友~",
-        fullDesc: "哈奇（ハチワレ）是一只蓝色的小猫，吉伊最要好的伙伴。性格开朗乐观，可靠又温柔，经常照顾吉伊和其他朋友。",
+        shortDesc: "白色小仓鼠，虽然爱哭但关键时刻很勇敢~",
+        fullDesc: "吉伊（ちいかわ）是本作的主角，一只白色的小仓鼠。性格天真可爱，有点爱哭，但在关键时刻总能鼓起勇气，运气也是欧皇级别的，抽奖中了一间白色房子，与哈奇和乌萨奇是好朋友，武器：粉色的刺叉，除草等级：正在为了考取5级而奋斗学习中。",
         x: 34, y: 5, w: 30, h: 80
     },
     {
-        id: "usagi", name: "兔子", emoji: "🐰",
+        id: "hachiware", name: "哈奇/小八", emoji: "🐱",
+        image: "images/hachiware.png",
+        shortDesc: "物种未知？（作者说不是猫，因此可以吃洋葱、巧克力之类的）是吉伊最好的朋友~",
+        fullDesc: "哈奇（ハチワレ）主角团中的角色，性格乐观开朗，外向性性格，是吉伊和乌萨奇的好朋友，吉伊的现实嘴替。武器：蓝色的刺叉，除草等级：5级",
+        x: 2, y: 5, w: 30, h: 80
+    },
+    {
+        id: "usagi", name: "乌萨奇", emoji: "🐰",
         image: "images/usagi.png",
         shortDesc: "粉色兔子，活泼搞怪，总是充满能量~",
-        fullDesc: "兔子（うさぎ）是一只粉色的兔子，性格超级活泼，经常做出各种搞怪的事情逗大家开心。",
+        fullDesc: "主角团之一，是哈奇和吉伊的好朋友，性格敏锐随性，自由奔放而神秘，经常会发出“呀哈”、“乌拉”等怪声，武器：有着一把能从两端发出火药的棍子，除草等级：3级",
         x: 66, y: 5, w: 30, h: 80
     },
     {
-        id: "momonga", name: "鼯鼠", emoji: "🐿️",
+        id: "momonga", name: "飞鼠", emoji: "🐿️",
         image: "images/momonga.png",
         shortDesc: "小飞鼠，可以在空中滑翔的可爱伙伴~",
-        fullDesc: "鼯鼠（モモンガ）是一只可爱的小飞鼠，它可以在空中滑翔，是伙伴们的好朋友。",
-        x: 74, y: 20, w: 18, h: 35
+        fullDesc: "鼯鼠（モモンガ）是一只小飞鼠，此飞鼠非彼飞鼠，奇美拉大强抢夺了飞鼠的身体成为小可爱。性格调皮，喜欢装可爱与欺负吉伊，常提出无理要求。",
     },
     {
         id: "kurimanju", name: "栗子馒头", emoji: "🌰",
         image: "images/kurimanju.png",
         shortDesc: "甜甜的栗子味小馒头，贪吃又可爱~",
-        fullDesc: "栗子馒头（くりまんじゅう）是一个可爱的栗子形点心角色，性格贪吃，总是想着美食。它的外表圆滚滚的，非常讨人喜欢。",
-        x: 5, y: 52, w: 18, h: 30
+        fullDesc: "栗子馒头（くりまんじゅう），外形类似蜜獾，是位料理美食家，擅长制作美味的下酒菜，总会提供食物的新奇吃法，吃完食物会发出 “哈” 的声音，具有饮酒资格证，还会保护受欺负的小可爱。",
+
     },
     {
-        id: "yoroi", name: "铠甲人", emoji: "⚔️",
+        id: "yoroi", name: "手工铠", emoji: "⚔️",
         image: "images/yoroi.png",
         shortDesc: "穿着铠甲的神秘角色，其实很温柔~",
-        fullDesc: "铠甲人（鎧さん）是一个全身穿着铠甲的神秘角色。虽然外表看起来很威武，但其实性格温柔，是可靠的伙伴。",
-        x: 26, y: 50, w: 18, h: 32
+        fullDesc: "手工铠（鎧さん），喜欢手作各种挎包、睡衣、雨衣送给吉伊等人，吉伊的粉色小熊包就是手工铠制作的，会认真倾听用户建议，身上的小熊包是吉伊同款，经常和劳动铠与拉面铠野餐。",
+
     },
     {
         id: "rakko", name: "海獭", emoji: "🦦",
         image: "images/rakko.png",
         shortDesc: "可爱的海獭，喜欢在水中玩耍~",
-        fullDesc: "海獭（ラッコ）是一只可爱的海獭角色，喜欢在水中游泳和玩耍。性格温和，是大家的好朋友。",
-        x: 48, y: 52, w: 18, h: 30
+        fullDesc: "海獭（ラッコ），讨伐榜第一名，外形类似海獭，身为大侠却有少女心，喜欢一边揉脸一边吃甜品，也会纠结一个独一无二的称呼，经常带吉伊三人组去兜风、吃美食，教导他们讨伐技巧。",
+
     },
     {
-        id: "shisa", name: "石狮子", emoji: "🦁",
+        id: "shisa", name: "狮萨", emoji: "🦁",
         image: "images/shisa.png",
         shortDesc: "像守护神一样的石狮子角色~",
-        fullDesc: "石狮子（シーサー）是像冲绳守护神一样的角色，有着威严的外表但内心善良，守护着伙伴们的安全。",
-        x: 68, y: 50, w: 16, h: 32
+        fullDesc: "狮萨（シーサー），原型是冲绳的神兽「风狮爷」，热衷于学习，是 “郎” 拉面馆的店员，拥有超级打工者证，为了和师傅饮酒，正在考取饮酒资格证。",
+
     },
     {
         id: "kani", name: "螃蟹", emoji: "🦀",
         image: "images/kani.png",
         shortDesc: "横着走的小螃蟹，造型超可爱~",
-        fullDesc: "螃蟹（カニ）是吉伊卡哇中的一只小螃蟹角色，横着走路的样子非常可爱，是伙伴们的开心果。",
-        x: 84, y: 48, w: 14, h: 30
+        fullDesc: "螃蟹（カニ）原型是鼹鼠，古本非常喜欢书，家里放满了书，古本的知识储备很好，但是战斗力不是很厉害。虽然遭受了很多不合理的对待，但是总是很高兴的样子。和莫莫咖成为朋友后，头上一直带这莫莫咖送的发箍！",
+
     }
 ];
 
@@ -233,7 +231,7 @@ characterAreas.forEach(function (char) {
     charGrid.appendChild(card);
 });
 
-// 把九宫格插入角色页面
+// 九宫格插入角色页面
 var charCardsContainer = document.getElementById("character-cards");
 charCardsContainer.innerHTML = "";
 charCardsContainer.appendChild(charGridSection);
